@@ -1,0 +1,80 @@
+/* src/App.css */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+  grid-gap: 1px; /* Adjust the gap as needed */
+  gap: 0px;
+}
+
+.cell {
+  width: 20px; /* Adjust based on fit to screen mode */
+  height: 20px; /* Adjust based on fit to screen mode */
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #808080;
+  background-color: #c0c0c0;
+  user-select: none;
+  cursor: pointer;
+}
+
+.cell.revealed {
+  background-color: #f2f2f2;
+  cursor: default;
+}
+
+.cell.mine {
+  background-color: red;
+}
+
+.cell.flagged {
+  background-color: yellow;
+}
+
+/* You can add specific styles for numbers like this */
+.cell.adjacent-1 {
+  color: blue;
+}
+
+.cell.adjacent-2 {
+  color: green;
+}
+
+.cell.adjacent-3 {
+  color: red;
+}
+
+.cell.adjacent-4 {
+  color: darkblue;
+}
+
+.cell.adjacent-5 {
+  color: brown;
+}
+
+.cell.adjacent-6 {
+  color: cyan;
+}
+
+.cell.adjacent-7 {
+  color: black;
+}
+
+.cell.adjacent-8 {
+  color: grey;
+}
+/* ... up to adjacent-8 */
+
+.cell.adjacent-0.revealed {
+  cursor: not-allowed;
+}
+
+.fit-to-screen {
+  /* Styles to scale the board to fit the screen */
+}
