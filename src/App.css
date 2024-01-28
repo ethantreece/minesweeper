@@ -1,31 +1,55 @@
-/* src/App.css */
 .board {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
-  grid-gap: 1px; /* Adjust the gap as needed */
+  grid-gap: 1px;
+  gap: 0px;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+  grid-gap: 1px;
   gap: 0px;
 }
 
 .cell {
-  width: 20px; /* Adjust based on fit to screen mode */
-  height: 20px; /* Adjust based on fit to screen mode */
-}
-
-.cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
   width: 30px;
   height: 30px;
-  border: 1px solid #808080;
-  background-color: #c0c0c0;
+  background-color: #a3a3a3;
+  /* border: 1px solid #7b7b7b; */
+  /* border-top-color: #d9d9d9;
+  border-left-color: #d9d9d9; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Courier New", monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
   user-select: none;
   cursor: pointer;
+  box-shadow: inset 2px 2px 1px #7b7b7b;
 }
 
-.cell.revealed {
+/* .cell.fresh {
+  border: 3px solid #7b7b7b;
+  border-top-color: #d9d9d9;
+  border-left-color: #d9d9d9;
+} */
+
+.cell.fresh {
+  background-color: #a3a3a3;
+  box-shadow: inset 2px 2px 6px #d9d9d9, inset -3px -3px 1px #7b7b7b;
+}
+
+/* .cell.revealed {
   background-color: #f2f2f2;
+  cursor: default;
+} */
+.cell.revealed {
+  background-color: #a3a3a3;
+  /* border: 1px solid #6d6d6d; */
+  /* border-top-color: #f7f7f7;
+  border-left-color: #f7f7f7; */
   cursor: default;
 }
 
@@ -33,9 +57,9 @@
   background-color: red;
 }
 
-.cell.flagged {
+/* .cell.flagged {
   background-color: yellow;
-}
+} */
 
 /* You can add specific styles for numbers like this */
 .cell.adjacent-1 {
@@ -69,12 +93,7 @@
 .cell.adjacent-8 {
   color: grey;
 }
-/* ... up to adjacent-8 */
 
 .cell.adjacent-0.revealed {
   cursor: not-allowed;
-}
-
-.fit-to-screen {
-  /* Styles to scale the board to fit the screen */
 }

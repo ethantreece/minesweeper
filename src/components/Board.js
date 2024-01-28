@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Cell from "./Cell";
 import { generateMines } from "../utils/gameLogic";
+import GameStatusIndicator from "./GameStatusIndicator";
+import "../App.css";
 
 const Board = ({ width, height, mines }) => {
   const [board, setBoard] = useState([]);
@@ -32,6 +34,15 @@ const Board = ({ width, height, mines }) => {
     // Reveal this cell
     board[x][y].revealed = true;
 
+    if (board[x][y].mine) {
+      setGameOver(true);
+      for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+          if (board[i][j].mine) board[i][j].revealed = true;
+        }
+      }
+    }
+
     // If the cell does not have adjacent mines, reveal its neighbors
     if (board[x][y].adjacentMines === 0) {
       for (let i = -1; i <= 1; i++) {
@@ -48,7 +59,7 @@ const Board = ({ width, height, mines }) => {
   };
 
   const handleReveal = (x, y) => {
-    if (gameOver) return; // Ignore clicks if the game is over
+    if (gameOver || board[x][y].flagged) return; // Ignore clicks if the game is over or if cell is flagged
 
     // Create a copy of the board to mutate
     const newBoard = [...board];
@@ -132,24 +143,31 @@ const Board = ({ width, height, mines }) => {
   };
 
   return (
-    <div
-      className="board"
-      onAuxClick={handleMiddleClick}
-      style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}
-    >
-      {board.map((row, rowIndex) =>
-        row.map((cell, colIndex) => (
-          <Cell
-            key={`${rowIndex}-${colIndex}`}
-            revealed={cell.revealed}
-            mine={cell.mine}
-            flagged={cell.flagged}
-            adjacentMines={cell.adjacentMines}
-            onReveal={() => handleReveal(rowIndex, colIndex)}
-            onFlag={(e) => handleFlag(e, rowIndex, colIndex)}
-          />
-        ))
-      )}
+    <div>
+      <GameStatusIndicator
+        onAuxClick={handleMiddleClick}
+        gameOver={gameOver}
+        onReset={resetGame}
+      />
+      <div
+        className="board"
+        onAuxClick={handleMiddleClick}
+        style={{ gridTemplateColumns: `repeat(${width}, 1fr)` }}
+      >
+        {board.map((row, rowIndex) =>
+          row.map((cell, colIndex) => (
+            <Cell
+              key={`${rowIndex}-${colIndex}`}
+              revealed={cell.revealed}
+              mine={cell.mine}
+              flagged={cell.flagged}
+              adjacentMines={cell.adjacentMines}
+              onReveal={() => handleReveal(rowIndex, colIndex)}
+              onFlag={(e) => handleFlag(e, rowIndex, colIndex)}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 };

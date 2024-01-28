@@ -1,22 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import Board from "./components/Board";
-
-// Constants for game levels
-const LEVELS = {
-  beginner: { width: 9, height: 9, mines: 10 },
-  intermediate: { width: 16, height: 16, mines: 40 },
-  expert: { width: 30, height: 16, mines: 99 },
-};
+import Game from "./components/Game";
 
 function App() {
-  // Default to beginner level
-  const [config, setConfig] = useState(LEVELS.expert);
-
   return (
-    <div className="board">
-      <Board width={config.width} height={config.height} mines={config.mines} />
-      {/* Additional UI elements for difficulty selection and custom config */}
+    <div className="App">
+      <header className="App-header">
+        <h1>Minesweeper</h1>
+      </header>
+      <main>
+        <Game /> {/* Rendering the Game component */}
+      </main>
     </div>
   );
 }
